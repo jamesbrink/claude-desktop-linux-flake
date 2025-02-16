@@ -12,7 +12,7 @@
   patchy-cnb,
 }: let
   pname = "claude-desktop";
-  version = "0.7.8";
+  version = "0.7.9";
   srcExe = fetchurl {
     # NOTE: `?v=0.7.8` doesn't actually request a specific version. It's only being used here as a cache buster.
     url = "https://storage.googleapis.com/osprey-downloads-c02f6a0d-347c-492b-a752-3e0651722e97/nest-win-x64/Claude-Setup-x64.exe?v=0.7.8";
@@ -56,7 +56,7 @@ in
 
       # Extract installer exe, and nupkg within it
       7z x -y ${srcExe}
-      7z x -y "AnthropicClaude-${version}-full.nupkg"
+      7z x -y "AnthropicClaude-${version}-full.nupkg" || 7z x -y "AnthropicClaude-0.7.9-full.nupkg"
 
       # Package the icons from claude.exe
       wrestool -x -t 14 lib/net45/claude.exe -o claude.ico
